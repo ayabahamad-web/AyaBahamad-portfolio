@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Aya Bahamad, Mechatronics Engineering student specializing in Industrial Production Engineering at ENSA Kenitra.">
+  <meta name="theme-color" content="#f3efe6">
+  <title>Aya Bahamad | Mechatronics Engineering</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2210%22 fill=%22%2314181f%22/><text x=%2232%22 y=%2242%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2226%22 fill=%22%23c9a227%22>AB</text></svg>">
+  <style>
+    :root {
+      --bg: #f3efe6;
+      --bg-alt: #ebe6db;
+      --surface: #fcfaf5;
+      --ink: #14181f;
+      --muted: #5d6673;
+      --line: #d5cfc2;
+      --accent: #1a6b66;
+      --accent-soft: rgba(26,107,102,.12);
+      --copper: #b4532a;
+      --gold: #c9a227;
+      --shadow: 0 14px 32px rgba(20,24,31,.07);
+      --radius: 16px;
+      --nav-h: 72px;
+      --max: 1120px;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --mono: "Cascadia Code", Consolas, "Courier New", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+    body {
+      font-family: var(--sans); background: var(--bg); color: var(--ink);
+      line-height: 1.65; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(rgba(20,24,31,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,24,31,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(100% - 40px, var(--max)); margin-inline: auto; }
+    h1,h2,h3 { letter-spacing: -.03em; line-height: 1.16; }
+    h2 { font-size: clamp(2rem, 3.3vw, 2.6rem); margin-bottom: 10px; }
+    h3 { font-size: 1.12rem; margin-bottom: 8px; }
+    p { margin-bottom: 12px; }
+    .lede { color: var(--muted); max-width: 68ch; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; color: var(--accent);
+      font: .72rem var(--mono); letter-spacing: .17em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--accent); }
+    /* Navigation */
+    .nav {
+      position: sticky; top: 0; z-index: 50; height: var(--nav-h);
+      backdrop-filter: blur(16px); background: rgba(243,239,230,.92);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 750; letter-spacing: -.02em; }
+    .logo-mark {
+      width: 36px; height: 36px; display: grid; place-items: center; background: var(--ink);
+      color: var(--bg); font: .75rem var(--mono);
+    }
+    .nav-links { display: flex; align-items: center; gap: 27px; list-style: none; }
+    .nav-links a { position: relative; color: var(--muted); font-size: .94rem; transition: color .2s; }
+    .nav-links a:hover,.nav-links a.active { color: var(--ink); }
+    .nav-links a.active::after {
+      content: ""; position: absolute; left: 0; bottom: -8px; width: 100%; height: 2px; background: var(--accent);
+    }
+    .menu-btn {
+      display: none; width: 42px; height: 42px; border: 1px solid var(--line);
+      background: var(--surface); cursor: pointer;
+    }
+    .menu-btn span,.menu-btn span::before,.menu-btn span::after {
+      display: block; width: 18px; height: 2px; background: var(--ink); position: relative; margin: auto;
+    }
+    .menu-btn span::before,.menu-btn span::after { content: ""; position: absolute; left: 0; }
+    .menu-btn span::before { top: -6px; } .menu-btn span::after { top: 6px; }
+
+    /* Hero */
+    .hero { position: relative; z-index: 1; padding: 54px 0 60px; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 54px; align-items: center; }
+    .kicker { font: .76rem var(--mono); color: var(--copper); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 15px; }
+    .hero h1 { font-size: clamp(2.7rem, 6vw, 4.5rem); margin-bottom: 10px; }
+    .role { font-size: 1.13rem; color: var(--accent); font-weight: 650; margin-bottom: 16px; }
+    .hero-copy { color: var(--muted); max-width: 56ch; margin-bottom: 24px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 999px; font-size: .92rem; font-weight: 650;
+      border: 1px solid transparent; cursor: pointer; transition: transform .2s, background .2s, color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--ink); color: #f7f3ea; box-shadow: var(--shadow); }
+    .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+    .btn-ghost:hover { background: var(--surface); }
+    .meta-row {
+      display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; padding-top: 18px;
+      border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem;
+    }
+    .meta-row strong {
+      display: block; color: var(--ink); font-size: .74rem; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 3px;
+    }
+    .portrait {
+      position: relative; width: 100%; max-width: 470px; aspect-ratio: 4 / 5;
+      justify-self: end; overflow: hidden; background: #172029; border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+    .portrait-frame { position: absolute; inset: 15px; z-index: 2; border: 1px solid rgba(243,239,230,.28); pointer-events: none; }
+    .portrait-image {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%; z-index: 1;
+    }
+    .portrait-placeholder {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      color: #f3efe6; font-size: 5rem; font-weight: 750;
+      background: radial-gradient(circle at 30% 20%, rgba(26,107,102,.3), transparent 40%), #14181f;
+    }
+    .portrait-caption {
+      position: absolute; z-index: 3; left: 28px; right: 28px; bottom: 23px;
+      display: flex; justify-content: space-between; gap: 12px; color: rgba(243,239,230,.9);
+      font: .66rem var(--mono); letter-spacing: .13em; text-transform: uppercase;
+      text-shadow: 0 1px 5px rgba(0,0,0,.6);
+    }
+    .corner { position: absolute; z-index: 4; width: 14px; height: 14px; border: 1.5px solid var(--gold); pointer-events: none; }
+    .corner.tl { top: 9px; left: 9px; border-right: 0; border-bottom: 0; }
+    .corner.tr { top: 9px; right: 9px; border-left: 0; border-bottom: 0; }
+    .corner.bl { bottom: 9px; left: 9px; border-right: 0; border-top: 0; }
+    .corner.br { bottom: 9px; right: 9px; border-left: 0; border-top: 0; }
+
+    /* Sections: left aligned and tighter vertical rhythm */
+    section.content-section { position: relative; z-index: 1; padding: 34px 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
+    .section-head {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 5px;
+      width: 100%; margin: 0 0 20px; text-align: left;
+    }
+    .section-head > div { width: 100%; min-width: 0; text-align: left !important; }
+    .section-head h2, .section-head .eyebrow, .section-head .lede { text-align: left; margin-left: 0; margin-right: 0; }
+    .section-index { color: var(--gold); font: .76rem var(--mono); padding-top: 0; text-align: left; }
+    .cards { display: grid; gap: 16px; }
+    .card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; align-items: stretch; }
+    .about-copy p + p { margin-top: 10px; }
+    .stat-grid { display: grid; gap: 10px; }
+    .stat { padding: 17px 19px; background: var(--ink); color: #f3efe6; border-radius: var(--radius); }
+    .stat span { display: block; font-size: 1.45rem; font-weight: 750; letter-spacing: -.04em; }
+    .stat small { color: rgba(243,239,230,.72); }
+
+    /* Projects */
+    .project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+    .project-card { display: flex; flex-direction: column; align-items: flex-start; }
+    .project-media {
+      width: 100%; height: 132px; border-radius: 11px; margin-bottom: 15px;
+      display: grid; place-items: center; color: #f3efe6; font: .7rem var(--mono);
+      letter-spacing: .12em; text-transform: uppercase;
+      background: linear-gradient(135deg,rgba(26,107,102,.65),rgba(20,24,31,.95)),
+        repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,.05) 19px);
+    }
+    .project-media.p2 { background: linear-gradient(135deg,rgba(180,83,42,.65),rgba(20,24,31,.95)),repeating-linear-gradient(45deg,transparent,transparent 14px,rgba(255,255,255,.05) 15px); }
+    .project-media.p3 { background: linear-gradient(135deg,rgba(201,162,39,.55),rgba(20,24,31,.95)),repeating-linear-gradient(-45deg,transparent,transparent 16px,rgba(255,255,255,.05) 17px); }
+    .project-media.p4 { background: linear-gradient(135deg,rgba(60,89,130,.7),rgba(20,24,31,.95)),repeating-linear-gradient(90deg,transparent,transparent 16px,rgba(255,255,255,.05) 17px); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 0 13px; }
+    .tag { font-size: .7rem; padding: 3px 8px; background: var(--accent-soft); color: var(--accent); border-radius: 999px; }
+    .project-card .lede { font-size: .91rem; margin-bottom: 17px; }
+    .project-card .btn { margin-top: auto; font-size: .84rem; padding: 9px 14px; }
+
+    /* Timeline */
+    .timeline { display: grid; gap: 0; border-left: 2px solid var(--line); padding-left: 22px; }
+    .exp { position: relative; padding: 0 0 25px; }
+    .exp:last-child { padding-bottom: 0; }
+    .exp::before {
+      content: ""; position: absolute; left: -29px; top: 7px; width: 11px; height: 11px;
+      border-radius: 50%; background: var(--surface); border: 2px solid var(--accent);
+    }
+    .exp-meta { font: .66rem var(--mono); color: var(--copper); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 5px; }
+    .exp .lede { margin-bottom: 6px; }
+    .exp ul { color: var(--muted); padding-left: 19px; margin: 7px 0 10px; }
+    .exp li { margin-bottom: 4px; }
+
+    /* Contact and footer */
+    .contact-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+    .contact-card { display: flex; flex-direction: column; gap: 6px; min-height: 125px; justify-content: center; }
+    .contact-card small { color: var(--muted); font: .67rem var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .contact-card a,.contact-card span { font-size: 1rem; font-weight: 650; overflow-wrap: anywhere; }
+    .contact-card a:hover { color: var(--accent); }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padding: 22px 0 30px; color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr .8fr; gap: 28px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; }
+      .contact-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .nav-links { gap: 17px; }
+    }
+    @media (max-width: 700px) {
+      :root { --nav-h: 66px; }
+      .wrap { width: min(100% - 30px,var(--max)); }
+      .menu-btn { display: grid; place-items: center; }
+      .nav-links {
+        display: none; position: absolute; top: var(--nav-h); left: 0; right: 0;
+        padding: 16px 22px 22px; background: var(--surface); border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: flex-start; gap: 13px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { padding: 38px 0 42px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+      .portrait { justify-self: start; width: min(100%,390px); }
+      .hero h1 { font-size: clamp(2.55rem,12vw,4rem); }
+      section.content-section { padding: 28px 0; }
+      .section-head { align-items: flex-start; gap: 4px; margin-bottom: 16px; }
+      .section-index { padding-top: 0; text-align: left; }
+      .project-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,*::before,*::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#home" aria-label="Aya Bahamad home"><span class="logo-mark">AB</span><span>Aya Bahamad</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <p class="kicker">ENSA Kenitra · Morocco</p>
+          <h1>Aya Bahamad</h1>
+          <p class="role">Mechatronics Engineering · Industrial Production</p>
+          <p class="hero-copy">Final-year Mechatronics Engineering student at ENSA Kenitra, specializing in Industrial Production Engineering (Productique Industrielle). Passionate about industrial automation, maintenance, and continuous improvement. Interested in developing innovative solutions to enhance industrial performance.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="cv.pdf" download="Aya_Bahamad_CV.pdf">Download CV</a>
+            <a class="btn btn-ghost" href="#projects">View projects</a>
+          </div>
+          <div class="meta-row">
+            <div><strong>Focus</strong>Productique Industrielle</div>
+            <div><strong>Based in</strong>Kenitra, Morocco</div>
+            <div><strong>Status</strong>Seeking PFE · Feb 2027</div>
+          </div>
+        </div>
+        <div class="portrait reveal" aria-label="Portrait of Aya Bahamad">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <div class="portrait-placeholder" id="portraitFallback" aria-hidden="true">AB</div>
+          <img class="portrait-image" src="images/aya.jpeg" alt="Portrait of Aya Bahamad" onerror="this.style.display='none'; document.getElementById('portraitFallback').style.display='grid';" onload="document.getElementById('portraitFallback').style.display='none';">
+          <div class="portrait-frame"></div>
+          <div class="portrait-caption"><span>Portrait</span><span>Aya Bahamad</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-index">01 — About</div>
+          <div><p class="eyebrow">Profile</p><h2>Engineering with precision and purpose</h2><p class="lede">A systems-minded engineer focused on industrial performance, automation and product quality.</p></div>
+        </div>
+        <div class="about-grid">
+          <article class="card about-copy reveal">
+            <p>I am Aya Bahamad, a final-year student in Mechatronics Engineering at the National School of Applied Sciences of Kenitra (ENSAK), Morocco, specializing in Industrial Production Engineering (Productique Industrielle).</p>
+            <p>My academic background has allowed me to develop skills in industrial automation, maintenance, robotics, and production process optimization. Through my internships and academic projects, I have gained practical experience in designing, simulating, and developing technical solutions.</p>
+            <p>I am particularly interested in continuous improvement, industrial digitalization, and smart manufacturing. I am currently looking for a Final-Year Project Internship (PFE) starting in February 2027, where I can apply my knowledge and contribute to real industrial challenges.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-index">02 — Projects</div>
+          <div><p class="eyebrow">Selected work</p><h2>Projects & Innovation</h2><p class="lede">Engineering, maintenance digitalization, energy systems, and patent-oriented product concepts.</p></div>
+        </div>
+        <div class="project-grid">
+          <article class="card project-card reveal">
+            <div class="project-media">Energy systems</div>
+            <h3>Biomass-Based Electricity Production Unit</h3>
+            <div class="tags"><span class="tag">CATIA</span><span class="tag">ANSYS Fluent</span><span class="tag">CFD Simulation</span><span class="tag">Thermal Analysis</span></div>
+            <p class="lede">Designed a biomass-based electricity production system, focusing on the combustion chamber and energy conversion process. Developed the chamber design using CATIA and performed CFD simulations in ANSYS Fluent to analyze thermal behavior and fluid flow.</p>
+            <a class="btn btn-ghost" href="Projects/Biomass-Based%20Electricity%20Production%20Unit.pdf" target="_blank" rel="noopener noreferrer">View project report ↗</a>
+          </article>
+          <article class="card project-card reveal">
+            <div class="project-media p2">Patent-oriented innovation</div>
+            <h3>Smart Selective Sound Insulation Headband</h3>
+            <div class="tags"><span class="tag">Product Innovation</span><span class="tag">Mechatronics</span><span class="tag">Concept Development</span><span class="tag">Patent Project</span></div>
+            <p class="lede">Developed an innovative headband concept designed to provide selective sound insulation. The project explores a smart solution for improving the listening experience while addressing unwanted surrounding noise, as part of a patent-oriented innovation initiative.</p>
+            <a class="btn btn-ghost" href="Projects/Smart%20Selective%20Sound%20Insulation%20Headband.pdf" target="_blank" rel="noopener noreferrer">View project report ↗</a>
+          </article>
+          <article class="card project-card reveal">
+            <div class="project-media p3">Maintenance digitalization</div>
+            <h3>TRIGA Manager — Maintenance Management Application</h3>
+            <div class="tags"><span class="tag">Application Development</span><span class="tag">Database</span><span class="tag">Maintenance</span><span class="tag">Traceability</span></div>
+            <p class="lede">Developed TRIGA Manager, an application for spare parts management and traceability for the TRIGA Mark II research reactor at CNESTEN. Designed a database to manage inventory, equipment, and maintenance interventions, supporting the digitalization of maintenance activities.</p>
+            <a class="btn btn-ghost" href="Projects/TRIGA%20Manager.pdf" target="_blank" rel="noopener noreferrer">View project report ↗</a>
+          </article>
+          <article class="card project-card reveal">
+            <div class="project-media p4">Patent-oriented innovation</div>
+            <h3>Interactive Reading-Light Interface with Integrated Haptic Feedback</h3>
+            <div class="tags"><span class="tag">Mechatronics</span><span class="tag">Human-Machine Interaction</span><span class="tag">Haptic Feedback</span><span class="tag">Patent Project</span></div>
+            <p class="lede">Developed an innovative system concept combining an interactive reading-light interface with integrated haptic feedback. The project explores an intuitive interaction approach that brings together lighting control and tactile feedback as part of a patent-oriented initiative.</p>
+            <a class="btn btn-ghost" href="Projects/Interactive%20Reading-Light%20Interface%20System.pdf" target="_blank" rel="noopener noreferrer">View project report ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-index">03 — Experience</div>
+          <div><p class="eyebrow">Professional path</p><h2>Experience</h2></div>
+        </div>
+        <div class="card reveal">
+          <div class="timeline">
+            <article class="exp">
+              <p class="exp-meta">July – August 2026 · PFA Internship · Maâmora, Morocco</p>
+              <h3>CNESTEN — National Centre for Nuclear Energy, Sciences and Techniques</h3>
+              <p class="lede"><strong>Maintenance Management &amp; Digitalization</strong></p>
+              <ul>
+                <li>Developed TRIGA Manager, an application for spare parts management and traceability for the TRIGA Mark II research reactor.</li>
+                <li>Designed a database to monitor inventory, equipment, and maintenance interventions.</li>
+                <li>Contributed to improving equipment maintenance management through digitalization.</li>
+              </ul>
+              <div class="tags"><span class="tag">Application Development</span><span class="tag">Database Management</span><span class="tag">Maintenance</span><span class="tag">Traceability</span></div>
+            </article>
+            <article class="exp">
+              <p class="exp-meta">July 2025 · Observation Internship · Tangier, Morocco</p>
+              <h3>Renault Tanger</h3>
+              <p class="lede"><strong>Paint Department</strong></p>
+              <ul>
+                <li>Participated in improving and automating a production trolley.</li>
+                <li>Gained practical insight into automated production lines and industrial maintenance methods.</li>
+                <li>Discovered industrial processes and equipment operation in an automotive manufacturing environment.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="education">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-index">04 — Education</div>
+          <div><p class="eyebrow">Academic background</p><h2>Education</h2></div>
+        </div>
+        <div class="card reveal">
+          <div class="timeline">
+            <article class="exp">
+              <p class="exp-meta">2024 – Present · Kenitra, Morocco</p>
+              <h3>National School of Applied Sciences of Kenitra (ENSAK)</h3>
+              <p class="lede">Engineering Degree in Mechatronics</p>
+              <p class="lede">Specialization: Industrial Production Engineering</p>
+            </article>
+            <article class="exp">
+              <p class="exp-meta">2022 – 2024 · Safi, Morocco</p>
+              <h3>National School of Applied Sciences of Safi (ENSAS)</h3>
+              <p class="lede">Integrated Preparatory Classes</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="section-index">05 — Contact</div>
+          <div><p class="eyebrow">Let’s talk</p><h2>Let’s Connect</h2>
+            <p class="lede">I am open to opportunities, professional collaborations, and engineering projects. I am currently seeking a Final-Year Project Internship (PFE) starting in February 2027.</p>
+            <p class="lede">Feel free to reach out to discuss opportunities or connect professionally.</p>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <article class="card contact-card reveal"><small>Email</small><a href="mailto:aya.bahamad133@gmail.com">aya.bahamad133@gmail.com</a></article>
+          <article class="card contact-card reveal"><small>LinkedIn</small><a href="https://www.linkedin.com/in/aya-bahamad-463745352/" target="_blank" rel="noopener noreferrer">linkedin.com/in/aya-bahamad-463745352</a></article>
+          <article class="card contact-card reveal"><small>Phone</small><a href="tel:+212644903013">+212 6 44 90 30 13</a></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Aya Bahamad. All rights reserved.</span>
+      <span>Mechatronics · Productique Industrielle · ENSA Kenitra</span>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add("js");
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuBtn.setAttribute("aria-label", "Open navigation menu");
+    }));
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navAnchors = document.querySelectorAll(".nav-links a");
+    function setActiveNav() {
+      let current = "home";
+      const marker = window.scrollY + 130;
+      sections.forEach(section => { if (section.offsetTop <= marker) current = section.id; });
+      navAnchors.forEach(anchor => anchor.classList.toggle("active", anchor.getAttribute("href") === "#" + current));
+    }
+    window.addEventListener("scroll", setActiveNav, { passive: true });
+    setActiveNav();
+
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
